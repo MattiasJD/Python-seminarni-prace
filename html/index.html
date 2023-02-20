@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+   <body>
+      <table>
+         <thead>
+            <td>Název</td>
+            <td>Autor</td>
+            <td>Popis</td>
+         </thead>
+
+         {% for row in rows %}
+            <tr>
+               <td>{{row["name"]}}</td>
+               <td>{{row["author"]}}</td>
+               <td>{{row["text"]}}</td>
+            </tr>
+         {% endfor %}
+      </table>
+
+      <a href = "/">Go back to home page</a>
+   </body>
+</html>
