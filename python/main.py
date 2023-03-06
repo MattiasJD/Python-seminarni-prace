@@ -1,44 +1,39 @@
-import VALUES as VALUES
-import sql as sql
 from flask import Flask, render_template, request
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+db = SQLAlchemy(app)
+
+class Recept(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nazev = db.Column(db.String(60))
+    text = db.Column(db.String(600))
+    ingredience = db.Column(db.String(200))
+
+    def __repr__(self):
+        return f'<User {self.name}>'
 
 @app.route('/')
-def hello_world():
-    return 'Hello world'
+def index():
+    return render_template('index.html')
 
-@app.route('/ahoj<name>')
-def kamil(name):
-    return 'ahoj %s' %name
+@app.route('/recepty')
+def users():
+    recepty = Recept.query.all()
+    return render_template('recepty.html', recepty=recepty)
 
-@app.route('/add_recipe')
-def add_recipe():
-    return ''
-
-@app.route('/index' , methods = ['POST', 'GET'])
-def write_recipes():
+@app.route('/pridat_recept', methods=['GET', 'POST'])
+def pridat_recept():
     if request.method == 'POST':
-        try:
-            name = request.form['name']
-            author = request.form['author']
-            text = request.form['text']
-
-            with sql.connect("database.db") as con:
-                cur = con.cursor()
-
-                cur.execute("INSERT INTO students (name,author,text)
-                VALUES(?, ?, ?, ?)",(nm,addr,city,pin) )
-
-                con.commit()
-                msg = "Record successfully added"
-        except:
-            con.rollback()
-            msg = "error in insert operation"
-
-        finally:
-            return render_template("result.html", msg=msg)
-            con.close()
+        nazev = request.form['nazev']
+        text = request.form['text']
+        ingredience = request.form['ingredience']
+        recept = Recept(nazev=nazev, text=text, ingredience=ingredience)
+        db.session.add(recept)
+        db.session.commit()
+        return 'Recept uspesne pridan!'
+    return render_template('pridat_recept.html')
 
 if __name__ == '__main__':
-        app.run(debug = True)
+    app.run(debug=True)

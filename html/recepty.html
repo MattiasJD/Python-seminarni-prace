@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recepty</title>
+</head>
+<body>
+    <h1>List receptů</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>nazev</th>
+                <th>text</th>
+                <th>ingredience</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for recept in recepty %}
+            <tr>
+                <td>{{ recept.id }}</td>
+                <td>{{ recept.nazev }}</td>
+                <td>{{ recept.text }}</td>
+                <td>{{ ingredience.text }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
