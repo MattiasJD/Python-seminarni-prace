@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import MetaData
+meta = MetaData()
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///recept.db'
 db = SQLAlchemy(app)
 
 class Recept(db.Model):
@@ -14,16 +16,17 @@ class Recept(db.Model):
     def __repr__(self):
         return f'<User {self.name}>'
 
-@app.route('/')
+
+@app.route('/index')
 def index():
     return render_template('index.html')
 
 @app.route('/recepty')
-def users():
+def receptyy():
     recepty = Recept.query.all()
     return render_template('recepty.html', recepty=recepty)
 
-@app.route('/pridat_recept', methods=['GET', 'POST'])
+@app.route('/pridat_recept', methods=['GET','POST'])
 def pridat_recept():
     if request.method == 'POST':
         nazev = request.form['nazev']
