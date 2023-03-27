@@ -1,4 +1,6 @@
 ﻿# piton-seminarni-arbeit
-TODO 
-UDĚLAT STRÁNKU S babiččinými recepty s FLASKEM
-BRUH
+ TODO
+- [x] basic flask application
+- [ ] upload pics
+- [ ] clickable recipes
+- [ ] prettier html
