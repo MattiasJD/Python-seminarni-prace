@@ -12,6 +12,7 @@
                 <th>nazev</th>
                 <th>text</th>
                 <th>ingredience</th>
+                <th>fotka</th>
             </tr>
         </thead>
         <tbody>
@@ -21,6 +22,7 @@
                 <td>{{ recept.nazev }}</td>
                 <td>{{ recept.text }}</td>
                 <td>{{ recept.ingredience }}</td>
+                <td><img src="{{ recept.path }}" alt="{{ recept.nazev }}"></td>
             </tr>
             {% endfor %}
         </tbody>

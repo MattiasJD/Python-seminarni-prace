@@ -8,5 +8,6 @@ students = Table(
    Column('nazev', String),
    Column('text', String),
    Column('ingredience', String),
+   Column('path', String)
 )
 meta.create_all(engine)

@@ -12,6 +12,7 @@ class Recept(db.Model):
     nazev = db.Column(db.String(60))
     text = db.Column(db.String(600))
     ingredience = db.Column(db.String(200))
+    path = db.Column(db.String(200))
 
     def __repr__(self):
         return f'<User {self.name}>'
@@ -31,8 +32,11 @@ def pridat_recept():
     if request.method == 'POST':
         nazev = request.form['nazev']
         text = request.form['text']
+        path = request.files['path']
+        filename = path.filename
+        path.save(f'templates/pictures/{filename}')
         ingredience = request.form['ingredience']
-        recept = Recept(nazev=nazev, text=text, ingredience=ingredience)
+        recept = Recept(nazev=nazev, text=text, ingredience=ingredience, path=f'./templates/pictures/{filename}')
         db.session.add(recept)
         db.session.commit()
         return 'Recept uspesne pridan!'
