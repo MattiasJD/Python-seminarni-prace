@@ -3,6 +3,6 @@
  Basic app in Python using Flask for editing and displaying of a database of recipes by your "grandma"
  ## Todo
 - [x] basic flask application
-- [ ] upload pics
+- [x] upload pics
 - [ ] clickable recipes
-- [ ] prettier html
+- [x] prettier html
